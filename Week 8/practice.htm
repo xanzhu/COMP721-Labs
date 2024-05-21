@@ -1,0 +1,134 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Javascript & Dom</title>
+</head>
+<body onload="makeTable()">
+<h1>Javascript Practice (DOM)</h1>
+    <div>
+        <h2>Document.write (Loop Subtotals) </h2>
+        <script>
+            let total = 0;
+            for (let i = 1; i <= 10; i++) {
+                total += i;
+                document.write("Subtotal: " + total + "<br>");
+            }
+        </script>
+    </div>
+    <div>
+        <h2>Set Background Color Function</h2>
+        <script>
+            function changeColor(color) {
+                document.body.style.backgroundColor = color;
+            }
+        </script>
+        <button onclick="changeColor('orange')">Orange</button>
+        <button onclick="changeColor('purple')">Purple</button>
+        <button onclick="changeColor('green')">Green</button>
+        <button onclick="changeColor('white')">Default</button>
+    </div>
+    <div>
+        <h2>AppendRow Table</h2>
+        <p>Subject Table</p>
+        <table id= "tbl" border="1"></table>
+        <br>
+        <button onclick="appendRow()">Append New Row</button>
+        <script type="text/javascript" src="domPrac.js"></script>
+    </div>
+    <div>
+        <h2>Split String</h2>
+        <button onclick="splitWords()">Enter a sentence</button>
+        <button onclick="clearWords()">Clear Input</button>
+
+        <div id="result"></div>
+        <script>
+            function splitWords() {
+                // Prompt user input
+                const userInput = prompt("Please enter a sentence!");
+
+                // Split words based on spaces
+                const words = userInput.split(" ");
+
+                // Print results to div
+                const result = document.getElementById('result');
+
+                // Loop over words
+                words.forEach(word => {
+                    // Create Text Node
+                    const textNode = document.createTextNode(word);
+                    result.appendChild(textNode);
+                    // Create br element for new line
+                    result.appendChild(document.createElement("br"));
+                })
+            }
+            // Clear input!
+            function clearWords() {
+                const result = document.getElementById('result');
+                result.innerHTML = "";
+            }
+        </script>
+    </div>
+    <div>
+        <h2>Email Database</h2>
+
+        <!-- Simple Form-->
+        <form onsubmit="insertData(); return false;">
+            <label for="name">Name:</label>
+            <input type="text" id="name">
+            <br>
+            <label for="email">Email:</label>
+            <input type="text" id="email">
+            <br>
+            <br>
+            <input type="submit" value="Insert Data">
+        </form>
+
+        <!-- Display Database -->
+        <div id="output"></div>
+
+        <script>
+            // EmailRecord constructor
+            function EmailRecord(name, email) {
+                this.name = name;
+                this.email = email;
+            }
+
+            // Print function
+            EmailRecord.prototype.print = function() {
+                var content = document.getElementById("output");
+                content.innerHTML += this.name + " | " + this.email + "<br>";
+            }
+
+            // Store Database Records
+            function EmailDB() {
+                this.records = [];
+            }
+
+            // Add Record Function
+            EmailDB.prototype.newEntry = function(name, email) {
+                var record = new EmailRecord(name, email);
+                this.records.push(record);
+                record.print();
+            }
+
+            // Create Database
+            var db = new EmailDB();
+
+            // Insert Entries
+            db.newEntry("Bobby Jenkins", "bobby@gmail.com");
+            db.newEntry("Rufus Du Sol", "rufus@gmail.com");
+            db.newEntry("Jennie Kim", "jennie@kim.com");
+
+            // Process Form Submission
+            function insertData() {
+                var name = document.getElementById("name").value;
+                var email = document.getElementById("email").value;
+                db.newEntry(name, email);
+                // Clear input
+                document.getElementById("name").value = "";
+                document.getElementById("email").value = "";
+            }
+        </script>
+    </div>
+</body>
+</html>
