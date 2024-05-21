@@ -1,0 +1,20 @@
+[
+  {
+    "isbn": "0764588508",
+    "title": "Beginning ASP.NET with CSharp",
+    "authors": "Hart, Kauffman, Sussman, Ullman",
+    "price": 39.99
+  },
+  {
+    "isbn": "245839450",
+    "title": "Book Number 2",
+    "authors": "Example Author 2",
+    "price": 59.99
+  },
+  {
+    "isbn": "45829403",
+    "title": "Book Number 3",
+    "authors": "Example Author 3",
+    "price": 140.58
+  }
+]
